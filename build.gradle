@@ -3,8 +3,8 @@ plugins {
     id 'idea'
     id 'eclipse'
     id 'org.jetbrains.kotlin.jvm' version '1.1.2-2'
-    //id 'org.jetbrains.kotlin.plugin.jpa' version '1.1.2-2'
-    //id 'org.jetbrains.kotlin.plugin.noarg' version '1.1.2-2'
+    id 'org.jetbrains.kotlin.plugin.jpa' version '1.1.2-2'
+    id 'org.jetbrains.kotlin.plugin.noarg' version '1.1.2-2'
     id 'org.jetbrains.kotlin.plugin.spring' version '1.1.2-2'
     id 'org.jetbrains.kotlin.plugin.allopen' version '1.1.2-2'
     id 'org.springframework.boot' version '1.5.3.RELEASE'
@@ -18,7 +18,9 @@ bootRepackage { enabled = false }
 subprojects {
 
     apply plugin: 'kotlin'
+    apply plugin: 'kotlin-jpa'
     apply plugin: 'application'
+    apply plugin: 'kotlin-noarg'
     apply plugin: 'kotlin-spring'
     apply plugin: 'kotlin-allopen'
     apply plugin: 'org.springframework.boot'
@@ -38,6 +40,7 @@ subprojects {
     dependencies {
         compile 'org.springframework.cloud:spring-cloud-starter-eureka',
                 'org.springframework.cloud:spring-cloud-starter-stream-rabbit',
+                'org.springframework.cloud:spring-cloud-sleuth-zipkin-stream',
                 "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlinVersion",
                 "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
         testCompile('org.springframework.boot:spring-boot-starter-test')

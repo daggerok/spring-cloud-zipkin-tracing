@@ -14,6 +14,6 @@ fun main(args: Array<String>) {
   SpringApplication.run(ServiceApplication::class.java, *args)
 }
 
-@RestController class SericeRestResource {
-  @GetMapping fun root() = mapOf<String, String>("result" to "service response")
+@RestController class ServiceRestResource {
+  @GetMapping fun root() = mapOf("result" to "service response")
 }

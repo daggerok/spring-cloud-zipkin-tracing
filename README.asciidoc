@@ -1,9 +1,19 @@
 = spring-cloud-zipkin-tracing image:https://travis-ci.org/daggerok/spring-cloud-zipkin-tracing.svg?branch=master["build status", link="https://travis-ci.org/daggerok/spring-cloud-zipkin-tracing"]
 
+1. run rabbitmq using docker-compose
+2. run eureka, zipkin-server service and client micro-services
+3. from link:"http://localhost:8761"["eureka ui"] go to client root URL: http://client
+4. press refresh couple of times
+5. checkout tracing on link:"http://localhost:9411"["zipkin ui"] for client and service (use Expand All)
+
+
 [source,bash]
 ----
 docker-compose up -d
-gradle bootRun -b eureka-server/build.gradle
-gradle --parallel zipkin-server:bootRun server:bootRun client:bootRun
+gradle --parallel eureka-server:bootRun zipkin-server:bootRun
+gradle --parallel service:bootRun client:bootRun
+open localhost:8761 # eureka ui
+open localhost:9411 # zipkin ui
+# ...
 docker-compose down -v
 ----

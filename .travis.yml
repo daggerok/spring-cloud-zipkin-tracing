@@ -3,7 +3,10 @@ dist: trusty
 language: java
 jdk: oraclejdk8
 install: true
+env:
+  DOCKER_COMPOSE_VERSION: 1.12.0
 before_install:
+  # gradle
   - curl -s "https://get.sdkman.io" | bash
   - source "$HOME/.sdkman/bin/sdkman-init.sh"
   - sdk selfupdate
@@ -12,10 +15,19 @@ before_install:
   - sdk use gradle
   - mkdir -p "$HOME/.sdkman/etc"
   - source "$HOME/.sdkman/bin/sdkman-init.sh"
+  # docker-compose
+  - sudo rm -rf /usr/local/bin/docker-compose
+  - export DOCKER_COPOSE_URL=https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)
+  - echo using\ $DOCKER_COPOSE_URL
+  - curl -L $DOCKER_COPOSE_URL > docker-compose
+  - chmod +x docker-compose
+  - sudo mv -f docker-compose /usr/local/bin
+  - docker-compose up -d
 script:
   - gradle clean build
 after_script:
   - gradle --stop
+  - docker-compose down -v
 cache:
   directories:
     - $HOME/.gradle/
