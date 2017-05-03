@@ -1,0 +1,9 @@
+= spring-cloud-zipkin-tracing image:https://travis-ci.org/daggerok/spring-cloud-zipkin-tracing.svg?branch=master["build status", link="https://travis-ci.org/daggerok/spring-cloud-zipkin-tracing"]
+
+[source,bash]
+----
+docker-compose up -d
+gradle bootRun -b eureka-server/build.gradle
+gradle --parallel zipkin-server:bootRun server:bootRun client:bootRun
+docker-compose down -v
+----

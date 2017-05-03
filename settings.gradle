@@ -1,0 +1,5 @@
+rootProject.name = 'spring-cloud-zipkin-tracing'
+include 'eureka-server'
+include 'zipkin-server'
+include 'service'
+include 'client'

@@ -1,0 +1,7 @@
+.idea/
+!.idea/runConfigurations
+build/
+.gradle/
+gradle*
+.DS_Store
+*.log
